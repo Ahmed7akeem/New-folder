@@ -14,21 +14,30 @@ if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['role
     $role = prep($_POST['role']);
 
     if ($role === 'admin') {
-        echo '<h1>hello admin</h1>';
         $sql = "SELECT * FROM users WHERE role = 'user'";
         $res = mysqli_query($conn, $sql);
 
         if (mysqli_num_rows($res) > 0) {
             while ($row = mysqli_fetch_assoc($res)) {
-                echo "<pre>";
-                print_r($row);
+                echo "User ID: {$row['id']}, Username: {$row['username']}, Role: {$row['role']}<br>";
             }
-        } else {
+        } 
+        else {
             echo "No users found with the specified role.";
         }
-    } else if ($role === 'user') {
-        echo '<h1>hello user</h1>';
-    } else {
+    } 
+    elseif ($role === 'user') {
+        $sql2 = 'INSERT INTO users (username, password, role) VALUES (?, ?, ?)';
+        $stmt = $conn->prepare($sql2);
+        $stmt->bind_param('sss', $username, $password, $role);
+
+        if ($stmt->execute()) {
+            echo "User successfully added!";
+        } else {
+            echo "Error adding user: " . $stmt->error;
+        }
+    }
+     else {
         echo 'Enter valid data.';
     }
 }
