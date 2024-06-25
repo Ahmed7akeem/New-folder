@@ -14,10 +14,10 @@
             <div class="input">
                 <input type="text" placeholder="username" name="username"><br>
                 <input type="password" placeholder="password" name="password"><br>
-                <select class="form-select" aria-label="Default select example" name="role"><br>
+                <!--<select class="form-select" aria-label="Default select example" name="role"><br>
                   <option selected value="user">user</option>
-                  <option value="admin">admin</option>
-                </select>
+                  <option value="admin">admin</option> 
+                </select>-->
             </div>
             <button type="submit"> submit</button>
             
